@@ -22,8 +22,10 @@
 - [Week 19: 5 June](#week-19-5-june)
 - [Week 20: 12 July](#week-20-12-july)
 
-## [Week 1: 1 March](./resources/week-1.md)
+## Week 1: 1 March
 
+
+[Week 1 Resource File](./resources/week-1.md)
 
 - Setting up a Basic React App with Create React App
 - Working with asyncronous behaviour: Callback, Promises and async/await
