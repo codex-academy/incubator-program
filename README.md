@@ -1,5 +1,4 @@
-"# incubator-program" 
-
+# Incubator Program Outline
 
 - [Week 1: 1 March](#week-1-1-march)
 - [Week 2: 8 March](#week-2-8-march)
