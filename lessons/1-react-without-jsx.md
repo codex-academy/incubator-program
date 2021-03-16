@@ -1,5 +1,18 @@
 # React without JSX
 
+You might have seen some React codebases before, or you might have even heard about JSX before. You might have heard things like "JSX isn't a templating language" and that "JSX is based on XML and not HTML", or various other discussions. Even is this is the first time you are hearing about JSX it shouldn't matter, since JSX (which is something seperate from React) is a complex topic in it's own right.
+
+We're going to be talking about JSX at a later point, however for now we'll be looking at React through the lens of regular JavaScript, CSS and HTML.
+
+In order to get started let us create three files:
+
+- `index.html`
+- `styles.css`
+- `scripts.js`
+
+We can then add the following HTML and CSS to our `index.html`
+
+
 ```html
 <!DOCTYPE html>
 
@@ -46,29 +59,71 @@ body {
 }
 
 .header {
+  padding: 1rem;
+  text-align-center;
   background: #444;
   color: white;
 }
 
+.main {
+  padding: 2rem;
+}
+
 .footer {
+  padding: 1rem;
+  text-align-center;
   background: #444;
   color: white;
 }
 ```
 
-https://reactjs.org/docs/cdn-links.html
+You should see something as follows when opening the HTML file in your browsers:
+
+_TO ADD IMAGE_
+
+Within single page applications (SPA) this often called the App Shell.
+
+_ADD App Shell Info_
+
+However, we are merely showing "Loading..." for now where our app should go. Before we can add our React app to our page we need to include two React libraries:
+
+- The Core React library
+- The React DOM bindings
+
+It is important to note that by itself the core React logic is platform agnostic, in other words it can be used to create hybrid apps, virtual reality experiences, desktop software or even audio. This means that we need to include the document object model (DOM) bindings in order to connect our React logic to an HTML web page.
+
+We can add both of the following libraries before our existing `<script>` file by using the snippets from the [React CDN documentation(https://reactjs.org/docs/cdn-links.html).
 
 ```html
     <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
 ```
 
-`scripts.js`
+We can then add the following to our `scripts.js` file to confirm that both libraries have loaded into our JavaScript. If either of these are `undefined` you need to import them before your `script.js` in your HTML.
 
 ```js
 console.log(React)
 console.log(ReactDOM)
 ```
+
+Now that we have both the above lets create our first React element. A React element accepts three arguments:
+
+- The HTML tag to render
+- The attributes to add to the HTML tag
+- Children to be placed inside the tag.
+
+This means that if we do the following:
+
+```js
+const component = React.createElement('button', { title: 'This should show on hover' }, 'This is my first React Widget!');
+```
+
+Then `component` should return the following HTML:
+
+```html
+<button title="This should show on hover">This is my first React Widget!</a>
+```
+
 
 ```js
 const component = React.createElement('div', {}, 'This is my first React Widget!');
