@@ -124,48 +124,74 @@ Then `component` should return the following HTML:
 <button title="This should show on hover">This is my first React Widget!</a>
 ```
 
+This means we can do the exact same without React as follows: 
 
 ```js
-const component = React.createElement('div', {}, 'This is my first React Widget!');
-const node = document.getElementById('widget');
-
-ReactDOM.render(component, node)
+const element = document.createElement('button');
+element.title = 'This will show on hover';
+element.innerText = 'This is my first React Widget!'
 ```
 
+However, when we open our webpage it will still be showing "Loading..." instead of the above. This is because we need to bind the React logic to our DOM on our Webpage first. We can do this by means of the `ReactDOM.render` method. This method accepts two arguments, a REact element and the HTML DOM node that it should be attached to: For example if we want to place it inside our `<div id="widget">Loading...</div>` component we can do the following:
+
+```js
+const component = React.createElement('button', { title: 'This should show on hover' }, 'This is my first React Widget!');
+ReactDOM.render(component, document.getElementById('widget'))
+```
+
+Once again, this is similar to the way you would use the `appendChild` method without JavaScript:
+
+```js
+  const element = document.createElement('button');
+  element.title = 'This will show on hover';
+  element.innerText = 'This is my first React Widget!'
+  
+  const node = document.getElementById('widget')
+  node.appendChild(element);
+```
+
+
+You should see something as follows:
+
+_ADD Image_
+
+Note that we aren't restricted to only one node, but instead we can attach it to several HTML DOM nodes by changing our single `<div>` two four HTML elements:
+
+
 ```html
-  <div id="widget-1></div>
+  <div id="widget-1"></div>
   <div id="widget-2"></div>
   <div id="widget-3"></div>
   <div id="widget-4"></div>
 ```
 
+We can then render our element inside these with the following JavaScript:
+
 ```js
 const component = React.createElement('div', {}, 'This is my first React Widget');
-const node1 = document.getElementById('widget-1');
-const node2 = document.getElementById('widget-2');
-const node3 = document.getElementById('widget-3');
-const node4 = document.getElementById('widget-4');
 
-ReactDOM.render(component, node1)
-ReactDOM.render(component, node2)
-ReactDOM.render(component, node3)
-ReactDOM.render(component, node4)
+ReactDOM.render(component, document.getElementById('widget-1'));
+ReactDOM.render(component, document.getElementById('widget-2'));
+ReactDOM.render(component, document.getElementById('widget-3'));
+ReactDOM.render(component, document.getElementById('widget-4'));
 ```
+
+Furthermore, we can even render different elements to each of these nodes, each with their own text and CSS class by modifying our JS as follows and adding the CSS below:
+
 
 ```js
-const component = React.createElement('div', {}, 'This is my first React Widget!');
-const node1 = document.getElementById('widget-1');
-const node2 = document.getElementById('widget-2');
-const node3 = document.getElementById('widget-3');
-const node4 = document.getElementById('widget-4');
+const component = React.createElement('button', { className: 'green' }, 'This is my first React Widget!');
+const component = React.createElement('div', { className: 'blue' }, 'This is my second React Widget!');
+const component = React.createElement('div', { className: 'green' }, 'This is my third React Widget!');
+const component = React.createElement('div', { className: 'blue' }, 'This is my fourth React Widget!');
 
-ReactDOM.render(component, node1)
-ReactDOM.render(component, node2)
-ReactDOM.render(component, node3)
-ReactDOM.render(component, node4)
+ReactDOM.render(component, document.getElementById('widget-4'))
+ReactDOM.render(component, document.getElementById('widget-4'))
+ReactDOM.render(component, document.getElementById('widget-4'))
+ReactDOM.render(component, document.getElementById('widget-4'))
 ```
 
-```
+```css
 .green {
   color: rgb(30, 70, 32);
   background-color: rgb(237, 247, 237)
@@ -176,6 +202,16 @@ ReactDOM.render(component, node4)
   background-color: rgb(232, 244, 253);
 }
 ```
+
+You will note that we use `className` instead of `class`. That is because React is adding attributes by means of the native HTML DOM [Element API](https://developer.mozilla.org/en-US/docs/Web/API/Element), in which the [className property](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) and not `class`. This means that even without React we need to use "className", for Example:
+
+```js
+const element = document.createElement('button');
+element.title = 'This will show on hover';
+element.className = 'green';
+element.innerText = 'This is my first React Widget!'
+```
+
 
 
 ```js
